@@ -13,7 +13,7 @@
       <link>https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/</link>
       <pubDate>Fri, 05 Jul 2024 21:21:17 +0200</pubDate>
       <guid>https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/</guid>
-      <description>Let&amp;rsquo;s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn&amp;rsquo;t found resources on the internet.&#xA;The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn&amp;rsquo;t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.</description>
+      <description>Let&amp;rsquo;s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn&amp;rsquo;t found resources on the internet.&#xA;Why not put it in production anymore? Thinking of the code that I write these days for production, I&amp;rsquo;m afraid it&amp;rsquo;s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.</description>
     </item>
   </channel>
 </rss>

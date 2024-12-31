@@ -5,16 +5,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Code I wouldn&#39;t put into production anymore - manual auto vectorization - Yet another blog restart</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	
   <meta itemprop="name" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
-  <meta itemprop="description" content="Let’s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
-The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn’t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.">
+  <meta itemprop="description" content="Let’s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
+Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.">
   <meta itemprop="datePublished" content="2024-07-05T21:21:17+02:00">
   <meta itemprop="dateModified" content="2024-07-05T21:21:17+02:00">
-  <meta itemprop="wordCount" content="1194">
+  <meta itemprop="wordCount" content="1420">
   <meta itemprop="keywords" content="C&#43;&#43;"><meta property="og:url" content="https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/">
   <meta property="og:site_name" content="Yet another blog restart">
   <meta property="og:title" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
-  <meta property="og:description" content="Let’s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
-The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn’t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.">
+  <meta property="og:description" content="Let’s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
+Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -24,8 +24,8 @@ The code has by now been removed from the LHCb repositories, though it still exi
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
-  <meta name="twitter:description" content="Let’s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
-The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn’t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.">
+  <meta name="twitter:description" content="Let’s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
+Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.">
 <link rel="stylesheet" type="text/css" media="screen" href="https://pseyfert.github.io/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://pseyfert.github.io/css/main.css" />
 
@@ -92,8 +92,28 @@ The code has by now been removed from the LHCb repositories, though it still exi
 
     
     
-    <p>Let&rsquo;s be clear, this is no work of my own. It is based on code that <a href="http://cds.cern.ch/record/2668250">Florian Lemaitre</a> once <a href="https://gitlab.cern.ch/lhcb/LHCb/-/commit/ccd24ee9d4ad5a05a82886223eb1f67eb782a24d">committed to the LHCb software</a>.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+    <p>Let&rsquo;s be clear, this is no work of my own. It is based on what <a href="http://cds.cern.ch/record/2668250">Florian Lemaitre</a> once explained to me and <a href="https://gitlab.cern.ch/lhcb/LHCb/-/commit/ccd24ee9d4ad5a05a82886223eb1f67eb782a24d">committed to the LHCb software</a>.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
 It was something that I had been wondering about for a while and hadn&rsquo;t found resources on the internet.</p>
+<h2 id="why-not-put-it-in-production-anymore">Why not put it in production anymore?</h2>
+<p>Thinking of the code that I write these days for production, I&rsquo;m afraid
+it&rsquo;s way more important to be able to debug and maintain the code base than to
+squeeze the last CPU cycle out of the performance. Also from a developer time
+point of view, the opportunity cost for writing these blocks is way too high to
+justify (imo).</p>
+<p>In Florian&rsquo;s example, we couldn&rsquo;t have traded developer pay for buying CPUs.
+The code was rolled out on many systems running continuously with a large code
+stack. A few crucial functions sped up that get called from all over the code
+base would&rsquo;ve made sense. And, I&rsquo;d say having inhomogeneous readability
+standards across the code base was also justified (a small set of hot,
+unreadable, very thoroughly tested code while most other higher level code with
+lower maintenance cost).</p>
+<p>In other words: I don&rsquo;t mean to say such code must not go into production, I&rsquo;m
+saying it should be well justified. &ldquo;I want to use this for fun in Advent of
+Code&rdquo; or &ldquo;Here it really pays off&rdquo; are good justifications. But if you&rsquo;re just
+ramping up a code optimization effort, you probably have better return on
+investment (of your time) in other places and incur lower maintenance cost (and
+debug nightmares).</p>
+<h2 id="back-to-the-example">Back to the example</h2>
 <p>The code has by now been removed from the LHCb repositories, though it still
 exists in the git history. The removal was done with the comment that
 superseded, outdated, or deprecated code was removed, even though my impression
