@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Code I wouldn&#39;t put into production anymore - manual auto vectorization - Yet another blog restart</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	
+  <meta itemprop="name" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
+  <meta itemprop="description" content="Let’s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
+The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn’t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.">
+  <meta itemprop="datePublished" content="2024-07-05T21:21:17+02:00">
+  <meta itemprop="dateModified" content="2024-07-05T21:21:17+02:00">
+  <meta itemprop="wordCount" content="1194">
+  <meta itemprop="keywords" content="C&#43;&#43;"><meta property="og:url" content="https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/">
+  <meta property="og:site_name" content="Yet another blog restart">
+  <meta property="og:title" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
+  <meta property="og:description" content="Let’s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
+The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn’t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-05T21:21:17+02:00">
+    <meta property="article:modified_time" content="2024-07-05T21:21:17+02:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
+  <meta name="twitter:description" content="Let’s be clear, this is no work of my own. It is based on code that Florian Lemaitre once committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
+The code has by now been removed from the LHCb repositories, though it still exists in the git history. The removal was done with the comment that superseded, outdated, or deprecated code was removed, even though my impression was that the code wasn’t adopted yet - Sadly, a fate that probably too much code faces: a fixed term contributor implements a functionality / provides an API, deploys it (with tests and documentation), but then with the advocate gone, nobody ever calls the function.">
+<link rel="stylesheet" type="text/css" media="screen" href="https://pseyfert.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://pseyfert.github.io/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://pseyfert.github.io/css/dark.css" />
+
+	<script src="https://pseyfert.github.io/js/feather.min.js"></script>
+	
+		<script src="https://pseyfert.github.io/js/main.js"></script>
+</head>
+
+
+<body>
+
+
+	
+	<div class="container wrapper">
+		<div class="header">
+	
+	<h1 class="site-title"><a href="https://pseyfert.github.io/">Yet another blog restart</a></h1>
+	<div class="site-description"><nav class="nav social">
+			<ul class="flat"><li><a href="https://github.com/pseyfert/" title="Github"><i data-feather="github"></i></a></li><li><a href="/index.xml" title="RSS"><i data-feather="rss"></i></a></li><span class="scheme-toggle"><a href="#" id="scheme-toggle"></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">All posts</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+    <div class="post-header">
+    
+    <div class="meta">
+        <div class="date">
+            <span class="day">05</span>
+            <span class="rest">Jul 2024</span>
+        </div>
+    </div>
+    
+    <div class="matter">
+        <h1 class="title">Code I wouldn&#39;t put into production anymore - manual auto vectorization</h1>
+    </div>
+</div>
+
+
+    
+    
+    <p>Let&rsquo;s be clear, this is no work of my own. It is based on code that <a href="http://cds.cern.ch/record/2668250">Florian Lemaitre</a> once <a href="https://gitlab.cern.ch/lhcb/LHCb/-/commit/ccd24ee9d4ad5a05a82886223eb1f67eb782a24d">committed to the LHCb software</a>.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+It was something that I had been wondering about for a while and hadn&rsquo;t found resources on the internet.</p>
+<p>The code has by now been removed from the LHCb repositories, though it still
+exists in the git history. The removal was done with the comment that
+superseded, outdated, or deprecated code was removed, even though my impression
+was that the code wasn&rsquo;t adopted yet - Sadly, a fate that probably too much
+code faces: a fixed term contributor implements a functionality / provides an
+API, deploys it (with tests and documentation), but then with the advocate
+gone, nobody ever calls the function.</p>
+<p>But anyway, how can one use the vector unit of a CPU in C++ code? I want to highlight two options:</p>
+<h3 id="let-the-compiler-do-everything">Let the compiler do everything</h3>
+<p>Auto vectorizers are good and get better. So maybe the compiler can automatically do all the vectorization for us.</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">some_scalar_function</span>(<span style="color:#458;font-weight:bold">int</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">do_something</span>(std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">int</span><span style="color:#000;font-weight:bold">&gt;&amp;</span> input, std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">int</span><span style="color:#000;font-weight:bold">&gt;&amp;</span> output) {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input.size(); i<span style="color:#000;font-weight:bold">++</span>) {
+</span></span><span style="display:flex;"><span>        output[i] <span style="color:#000;font-weight:bold">=</span> some_scalar_function(input[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In the source code we&rsquo;re only exposed to scalar functions, and are completely
+oblivious of the vectorization that will happen during compilation.</p>
+<p>A downside: we&rsquo;re fully limited to the compiler&rsquo;s capabilities and if we have
+evidence (inspecting the assembly? printout?) evidence that the compiler does
+not manage to vectorize <code>some_scalar_function</code>, we have to accept scalar
+processing even if we&rsquo;re able to write the vectorized code with intrinsics
+ourselves.</p>
+<p>NB: The issues with the compiler&rsquo;s vectorization might just be that vector
+instructions only provide a certain numeric precision while the scalar version
+provides higher precision and thus the compiler decides to stick with the
+scalar version.</p>
+<p>Also, be aware that any programmer with access to time travel might as well use
+a future compiler version with better optimization capabilities and rely on
+auto-vectorization for everything.  Any programmer without access to time
+travel will get criticized for not using the auto-vectorizer if their code from
+today prevails to be read in the future.</p>
+<h3 id="write-everything-in-intrinsics">Write everything in intrinsics</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__m256 <span style="color:#900;font-weight:bold">some_function</span>(__m256);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">do_something</span>(std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>__m256<span style="color:#000;font-weight:bold">&gt;&amp;</span> input, std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>__m256<span style="color:#000;font-weight:bold">&gt;&amp;</span> output) {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input.size(); i<span style="color:#000;font-weight:bold">++</span>) {
+</span></span><span style="display:flex;"><span>        output[i] <span style="color:#000;font-weight:bold">=</span> some_function(input[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Implementing <code>some_function</code> is great because you can go to the limit of what
+the programming team is able to do and implement everything that the compiler
+can&rsquo;t do.</p>
+<p>It&rsquo;s usually harder to maintain than the scalar code, harder to port to other
+platforms, has basically no transition path for coming architectures with
+larger vector registers.</p>
+<p>When used in larger projects, one also faces the issue that either everywhere
+vector types and functions are used, or one might need to convert back and
+forth between scalar and vector types. (If I recall correctly, these data types don&rsquo;t actully get converted by any generated code. C++ just gives data variable types to some block of memory and one may not read a bunch of <code>float</code>s as <code>_m256</code>. But when actually converting between them one only uses functions to make the compiler happy and have valid C++. The CPU won&rsquo;t do anything.)</p>
+<h3 id="so-what-do-i-want">So what do I want?</h3>
+<p>What I want is ultimately the ability to provide the implementation of a
+function with intrinsics as <code>__m256 f(__m256)</code>, and tell the auto vectorizer
+that it shall use it for a scalar for-loop calling <code>output[i] = f(input[i])</code>.
+In other words, I aim to provide an implementation <code>__m256 f(__m256)</code> which
+shall be called like a <code>float f(float)</code> function.</p>
+<h4 id="call-site">Call site</h4>
+<p>In my example <code>f</code> is uncreatively named <code>wubbel</code> and the <a href="https://github.com/pseyfert/manual-auto-vectorization/blob/main/intermediate.cpp#L18">call site</a> is</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">for</span> (std<span style="color:#000;font-weight:bold">::</span>size_t i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> SIZE; <span style="color:#000;font-weight:bold">++</span>i) {
+</span></span><span style="display:flex;"><span>    t[i] <span style="color:#000;font-weight:bold">=</span> wubbel(v[i]);
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>with the function <a href="https://github.com/pseyfert/manual-auto-vectorization/blob/main/parts.h#L2"><strong>declaration</strong></a></p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((<span style="color:#000;font-weight:bold">const</span>, simd(<span style="color:#d14">&#34;notinbranch&#34;</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">float</span> wubbel(<span style="color:#458;font-weight:bold">float</span> x) <span style="color:#000;font-weight:bold">noexcept</span> <span style="color:#000;font-weight:bold">asm</span>(<span style="color:#d14">&#34;_Z6wubbelf&#34;</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The prefix <code>_Z6</code> and suffix <code>f</code> are the regular assembly symbol for a function taking a float as argument and returning a float.</p>
+<p>In the <a href="https://compiler-explorer.com/z/vao1jvd7x">assembly of the call size</a>, one can see that <code>wubbel</code> gets called with multiple different symbols, such as</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">vmovups</span> <span style="color:#008080">ymm0</span>, <span style="color:#008080">YMMWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">r12</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">add</span>     <span style="color:#008080">r12</span>, <span style="color:#099">32</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">add</span>     <span style="color:#008080">r15</span>, <span style="color:#099">32</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">call</span>    <span style="color:#008080">_ZGVcN8v_wubbel</span>(<span style="color:#008080">float</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">vmovups</span> <span style="color:#008080">YMMWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">r15-32</span>], <span style="color:#008080">ymm0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>or</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">vmovups</span> <span style="color:#008080">xmm0</span>, <span style="color:#008080">XMMWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">r14</span><span style="color:#a61717;background-color:#e3d2d2">+</span><span style="color:#008080">rax</span>*<span style="color:#099">4</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">lea</span>     <span style="color:#008080">rdx</span>, [<span style="color:#008080">r13</span><span style="color:#a61717;background-color:#e3d2d2">+</span><span style="color:#099">0</span><span style="color:#a61717;background-color:#e3d2d2">+</span><span style="color:#008080">rax</span>*<span style="color:#099">4</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">mov</span>     <span style="color:#008080">QWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">rbp-72</span>], <span style="color:#008080">rax</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">mov</span>     <span style="color:#008080">QWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">rbp-80</span>], <span style="color:#008080">rdx</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">call</span>    <span style="color:#008080">_ZGVbN4v_wubbel</span>(<span style="color:#008080">float</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>These symbols are explained on <a href="https://sourceware.org/glibc/wiki/libmvec?action=AttachFile&amp;do=view&amp;target=VectorABI.txt">sourceware.org</a> though I&rsquo;ll try to repeat the bits that I understood:</p>
+<ul>
+<li><code>_ZGV</code> This is a vectorized function</li>
+<li><code>b</code> for <code>SSE</code> and <code>c</code> for <code>AVX</code></li>
+<li><code>N</code> this is an unmasked version (i.e. the operation should be applied to all elements of the vector and not according to a mask)</li>
+<li><code>8</code> or <code>4</code> The size of the vector unit, i.e. how many elements get computed with each call</li>
+<li>some more parameter about alignment and such</li>
+</ul>
+<p>So in short, the <a href="https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html#index-simd-function-attribute"><code>simd(&quot;notinbranch&quot;)</code> attribute</a>
+told the compiler &ldquo;this function is available in multiple SIMD versions to link against.</p>
+<h4 id="implementation-site">Implementation site</h4>
+<p><a href="https://compiler-explorer.com/z/GnM3MKTx3">In case of possible auto vectorization</a>, the <code>simd</code> attribute can also generate code for these symbols.</p>
+<p>More importantly, one can also override the symbols for a function from those that the compiler generates by custom ones:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((<span style="color:#000;font-weight:bold">const</span>)) <span style="color:#000;font-weight:bold">__m128</span> wubbel(<span style="color:#000;font-weight:bold">__m128</span> input) <span style="color:#000;font-weight:bold">noexcept</span> <span style="color:#000;font-weight:bold">asm</span>(<span style="color:#d14">&#34;_ZGVbN4v__Z6wubbelf&#34;</span>);
+</span></span><span style="display:flex;"><span>__attribute__((<span style="color:#000;font-weight:bold">const</span>)) <span style="color:#000;font-weight:bold">__m128</span> wubbel(<span style="color:#000;font-weight:bold">__m128</span> input) <span style="color:#000;font-weight:bold">noexcept</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">_mm_hadd_ps</span>(_mm_rsqrt_ps(input), input);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In this case, this allows to implement a function that takes an <code>__m128</code> packed float and returns one of these, but actually comes with the symbol for a vectorized function that takes a single float.</p>
+<p>NB: The regular mangled symbol for a function that takes and returns <code>__m128</code> is <code>_Z6wubbelDv4_f</code>.</p>
+<p>Of cause, writing custom symbols for your functions is a matter that I consider
+error-prone and would prefer to let the compiler do. Assuming we don&rsquo;t introduce errors in the mangled symbol, we rather blindly assume that the argument variable data layout of <code>__m128</code> and an array of 4 <code>float</code> are the same.</p>
+<h4 id="all-that-needed-exactly-like-that">All that needed exactly like that?</h4>
+<p>No. It appears the function declaration doesn&rsquo;t need the assembly symbol user
+provided. We don&rsquo;t need to &ldquo;guess&rdquo; mangled names and could let the compiler
+generate symbols by compiling a trivial function with <code>-S</code> and look up the
+symbol. You can also see that Florian&rsquo;s code contained a small preprocessor
+macro to generate and test symbol names. But ultimately, what I posed above was
+what I managed to copy from Florian and got working. I needed to find a tradeoff between
+leaving Chesterton&rsquo;s fence standing and dropping overhead that I didn&rsquo;t need.</p>
+<h2 id="closing-remarks">Closing remarks</h2>
+<p>My small test repo is <a href="https://github.com/pseyfert/manual-auto-vectorization.git">here</a>. There, I actually implement different functions for the different vector widths to see from runtime printout which functions were called.</p>
+<p>I also used it in <a href="https://github.com/pseyfert/advent-of-code-2022/blob/main/02/c%2B%2B/scores.h">Advent of code
+2022</a>
+while completely unneccessarily.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>It&rsquo;s funny how I see 1/sqrt(x) getting optimized so often, as if all of human engineering was described by this one function. I&rsquo;ve never seen another function get optimized in this way, though at least someone once told me they could write the same for a cubic root instead of a square root.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+    <hr class="footer-separator" />
+<div class="tags">
+    
+    
+    <ul class="flat">
+        
+        
+        <li class="tag-li"><a href="/tags/c&#43;&#43;">C&#43;&#43;</a>
+        </li>
+        
+    </ul>
+    
+    
+</div>
+
+
+
+<div class="back">
+    <a href="https://pseyfert.github.io/"><span aria-hidden="true">← Back</span></a>
+</div>
+
+
+<div class="back">
+    
+</div>
+
+</div>
+
+	</div>
+	
+
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2024 </div>
+		
+	</nav>
+</div><script>feather.replace()</script>
+	
+</body>
+
+</html>
