@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Yet another blog restart</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Jul 2024 21:21:17 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 24 Aug 2025 18:26:57 +0200</lastBuildDate>
     <atom:link href="https://pseyfert.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Yes, the skin breathes but does it breath?</title>
+      <link>https://pseyfert.github.io/2025/08/yes-the-skin-breathes-but-does-it-breath/</link>
+      <pubDate>Sun, 24 Aug 2025 18:26:57 +0200</pubDate>
+      <guid>https://pseyfert.github.io/2025/08/yes-the-skin-breathes-but-does-it-breath/</guid>
+      <description>Given my activities in club during highschool years, I attended a couple of first aid courses, refreshers, paramedic courses, etc as standardized by various volunteer organizations in Germany. At a few occasions, breathing, oxygen processing by the body and such got discussed. And one of the teachers&#39; points usually was that the body gets all its oxygen through the air that we breath into the lung and none through the skin and that it was an urban myth that the skin breaths.</description>
+    </item>
     <item>
       <title>Code I wouldn&#39;t put into production anymore - manual auto vectorization</title>
       <link>https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/</link>
