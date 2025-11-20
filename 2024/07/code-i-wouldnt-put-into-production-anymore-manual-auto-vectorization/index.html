@@ -6,7 +6,7 @@
 	
   <meta itemprop="name" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
   <meta itemprop="description" content="Let’s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
-Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.">
+Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance. Also from a developer time point of view, the opportunity cost for writing these blocks is way too high to justify (imo).">
   <meta itemprop="datePublished" content="2024-07-05T21:21:17+02:00">
   <meta itemprop="dateModified" content="2024-07-05T21:21:17+02:00">
   <meta itemprop="wordCount" content="1420">
@@ -14,7 +14,7 @@ Why not put it in production anymore? Thinking of the code that I write these da
   <meta property="og:site_name" content="Yet another blog restart">
   <meta property="og:title" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
   <meta property="og:description" content="Let’s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
-Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.">
+Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance. Also from a developer time point of view, the opportunity cost for writing these blocks is way too high to justify (imo).">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -25,7 +25,7 @@ Why not put it in production anymore? Thinking of the code that I write these da
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Code I wouldn&#39;t put into production anymore - manual auto vectorization">
   <meta name="twitter:description" content="Let’s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn’t found resources on the internet.
-Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.">
+Why not put it in production anymore? Thinking of the code that I write these days for production, I’m afraid it’s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance. Also from a developer time point of view, the opportunity cost for writing these blocks is way too high to justify (imo).">
 <link rel="stylesheet" type="text/css" media="screen" href="https://pseyfert.github.io/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://pseyfert.github.io/css/main.css" />
 
@@ -135,13 +135,13 @@ gone, nobody ever calls the function.</p>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">some_scalar_function</span>(<span style="color:#458;font-weight:bold">int</span>);
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#cf222e">int</span> <span style="color:#6639ba">some_scalar_function</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span><span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">do_something</span>(std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">int</span><span style="color:#000;font-weight:bold">&gt;&amp;</span> input, std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#458;font-weight:bold">int</span><span style="color:#000;font-weight:bold">&gt;&amp;</span> output) {
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input.size(); i<span style="color:#000;font-weight:bold">++</span>) {
-</span></span><span style="display:flex;"><span>        output[i] <span style="color:#000;font-weight:bold">=</span> some_scalar_function(input[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">do_something</span><span style="color:#1f2328">(</span>std<span style="color:#0550ae">::</span>vector<span style="color:#0550ae">&lt;</span><span style="color:#cf222e">int</span><span style="color:#0550ae">&gt;&amp;</span> input<span style="color:#1f2328">,</span> std<span style="color:#0550ae">::</span>vector<span style="color:#0550ae">&lt;</span><span style="color:#cf222e">int</span><span style="color:#0550ae">&gt;&amp;</span> output<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> i <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> i <span style="color:#0550ae">&lt;</span> input<span style="color:#1f2328">.</span>size<span style="color:#1f2328">();</span> i<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        output<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> some_scalar_function<span style="color:#1f2328">(</span>input<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>In the source code we&rsquo;re only exposed to scalar functions, and are completely
@@ -172,13 +172,13 @@ today prevails to be read in the future.</p>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__m256 <span style="color:#900;font-weight:bold">some_function</span>(__m256);
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__m256 <span style="color:#6639ba">some_function</span><span style="color:#1f2328">(</span>__m256<span style="color:#1f2328">);</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">do_something</span>(std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>__m256<span style="color:#000;font-weight:bold">&gt;&amp;</span> input, std<span style="color:#000;font-weight:bold">::</span>vector<span style="color:#000;font-weight:bold">&lt;</span>__m256<span style="color:#000;font-weight:bold">&gt;&amp;</span> output) {
-</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> input.size(); i<span style="color:#000;font-weight:bold">++</span>) {
-</span></span><span style="display:flex;"><span>        output[i] <span style="color:#000;font-weight:bold">=</span> some_function(input[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">do_something</span><span style="color:#1f2328">(</span>std<span style="color:#0550ae">::</span>vector<span style="color:#0550ae">&lt;</span>__m256<span style="color:#0550ae">&gt;&amp;</span> input<span style="color:#1f2328">,</span> std<span style="color:#0550ae">::</span>vector<span style="color:#0550ae">&lt;</span>__m256<span style="color:#0550ae">&gt;&amp;</span> output<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> i <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> i <span style="color:#0550ae">&lt;</span> input<span style="color:#1f2328">.</span>size<span style="color:#1f2328">();</span> i<span style="color:#0550ae">++</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        output<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> some_function<span style="color:#1f2328">(</span>input<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Implementing <code>some_function</code> is great because you can go to the limit of what
@@ -205,9 +205,9 @@ shall be called like a <code>float f(float)</code> function.</p>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">for</span> (std<span style="color:#000;font-weight:bold">::</span>size_t i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> SIZE; <span style="color:#000;font-weight:bold">++</span>i) {
-</span></span><span style="display:flex;"><span>    t[i] <span style="color:#000;font-weight:bold">=</span> wubbel(v[i]);
-</span></span><span style="display:flex;"><span>  }
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span>std<span style="color:#0550ae">::</span>size_t i <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">;</span> i <span style="color:#0550ae">&lt;</span> SIZE<span style="color:#1f2328">;</span> <span style="color:#0550ae">++</span>i<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    t<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> wubbel<span style="color:#1f2328">(</span>v<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>with the function <a href="https://github.com/pseyfert/manual-auto-vectorization/blob/main/parts.h#L2"><strong>declaration</strong></a></p>
@@ -217,8 +217,8 @@ shall be called like a <code>float f(float)</code> function.</p>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((<span style="color:#000;font-weight:bold">const</span>, simd(<span style="color:#d14">&#34;notinbranch&#34;</span>)))
-</span></span><span style="display:flex;"><span><span style="color:#458;font-weight:bold">float</span> wubbel(<span style="color:#458;font-weight:bold">float</span> x) <span style="color:#000;font-weight:bold">noexcept</span> <span style="color:#000;font-weight:bold">asm</span>(<span style="color:#d14">&#34;_Z6wubbelf&#34;</span>)
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__<span style="color:#1f2328">((</span><span style="color:#cf222e">const</span><span style="color:#1f2328">,</span> simd<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;notinbranch&#34;</span><span style="color:#1f2328">)))</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">float</span> wubbel<span style="color:#1f2328">(</span><span style="color:#cf222e">float</span> x<span style="color:#1f2328">)</span> <span style="color:#cf222e">noexcept</span> <span style="color:#cf222e">asm</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;_Z6wubbelf&#34;</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The prefix <code>_Z6</code> and suffix <code>f</code> are the regular assembly symbol for a function taking a float as argument and returning a float.</p>
@@ -232,11 +232,11 @@ shall be called like a <code>float f(float)</code> function.</p>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">vmovups</span> <span style="color:#008080">ymm0</span>, <span style="color:#008080">YMMWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">r12</span>]
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">add</span>     <span style="color:#008080">r12</span>, <span style="color:#099">32</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">add</span>     <span style="color:#008080">r15</span>, <span style="color:#099">32</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">call</span>    <span style="color:#008080">_ZGVcN8v_wubbel</span>(<span style="color:#008080">float</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">vmovups</span> <span style="color:#008080">YMMWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">r15-32</span>], <span style="color:#008080">ymm0</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>        <span style="color:#6639ba">vmovups</span> <span style="color:#0550ae">ymm0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">YMMWORD</span> <span style="color:#0550ae">PTR</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">r12</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">add</span>     <span style="color:#0550ae">r12</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">32</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">add</span>     <span style="color:#0550ae">r15</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">32</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">call</span>    <span style="color:#0550ae">_ZGVcN8v_wubbel</span><span style="color:#1f2328">(</span><span style="color:#0550ae">float</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">vmovups</span> <span style="color:#0550ae">YMMWORD</span> <span style="color:#0550ae">PTR</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">r15-32</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">ymm0</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>or</p>
@@ -249,11 +249,11 @@ shall be called like a <code>float f(float)</code> function.</p>
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">vmovups</span> <span style="color:#008080">xmm0</span>, <span style="color:#008080">XMMWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">r14</span><span style="color:#a61717;background-color:#e3d2d2">+</span><span style="color:#008080">rax</span>*<span style="color:#099">4</span>]
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">lea</span>     <span style="color:#008080">rdx</span>, [<span style="color:#008080">r13</span><span style="color:#a61717;background-color:#e3d2d2">+</span><span style="color:#099">0</span><span style="color:#a61717;background-color:#e3d2d2">+</span><span style="color:#008080">rax</span>*<span style="color:#099">4</span>]
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">mov</span>     <span style="color:#008080">QWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">rbp-72</span>], <span style="color:#008080">rax</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">mov</span>     <span style="color:#008080">QWORD</span> <span style="color:#008080">PTR</span> [<span style="color:#008080">rbp-80</span>], <span style="color:#008080">rdx</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#900;font-weight:bold">call</span>    <span style="color:#008080">_ZGVbN4v_wubbel</span>(<span style="color:#008080">float</span>)
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-asm" data-lang="asm"><span style="display:flex;"><span>        <span style="color:#6639ba">vmovups</span> <span style="color:#0550ae">xmm0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">XMMWORD</span> <span style="color:#0550ae">PTR</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">r14</span><span style="color:#f6f8fa;background-color:#82071e">+</span><span style="color:#0550ae">rax</span><span style="color:#1f2328">*</span><span style="color:#0550ae">4</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">lea</span>     <span style="color:#0550ae">rdx</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">r13</span><span style="color:#f6f8fa;background-color:#82071e">+</span><span style="color:#0550ae">0</span><span style="color:#f6f8fa;background-color:#82071e">+</span><span style="color:#0550ae">rax</span><span style="color:#1f2328">*</span><span style="color:#0550ae">4</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">mov</span>     <span style="color:#0550ae">QWORD</span> <span style="color:#0550ae">PTR</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">rbp-72</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">rax</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">mov</span>     <span style="color:#0550ae">QWORD</span> <span style="color:#0550ae">PTR</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">rbp-80</span><span style="color:#1f2328">],</span> <span style="color:#0550ae">rdx</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6639ba">call</span>    <span style="color:#0550ae">_ZGVbN4v_wubbel</span><span style="color:#1f2328">(</span><span style="color:#0550ae">float</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>These symbols are explained on <a href="https://sourceware.org/glibc/wiki/libmvec?action=AttachFile&amp;do=view&amp;target=VectorABI.txt">sourceware.org</a> though I&rsquo;ll try to repeat the bits that I understood:</p>
@@ -277,10 +277,10 @@ told the compiler &ldquo;this function is available in multiple SIMD versions to
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__((<span style="color:#000;font-weight:bold">const</span>)) <span style="color:#000;font-weight:bold">__m128</span> wubbel(<span style="color:#000;font-weight:bold">__m128</span> input) <span style="color:#000;font-weight:bold">noexcept</span> <span style="color:#000;font-weight:bold">asm</span>(<span style="color:#d14">&#34;_ZGVbN4v__Z6wubbelf&#34;</span>);
-</span></span><span style="display:flex;"><span>__attribute__((<span style="color:#000;font-weight:bold">const</span>)) <span style="color:#000;font-weight:bold">__m128</span> wubbel(<span style="color:#000;font-weight:bold">__m128</span> input) <span style="color:#000;font-weight:bold">noexcept</span> {
-</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">_mm_hadd_ps</span>(_mm_rsqrt_ps(input), input);
-</span></span><span style="display:flex;"><span>}
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>__attribute__<span style="color:#1f2328">((</span><span style="color:#cf222e">const</span><span style="color:#1f2328">))</span> <span style="color:#cf222e">__m128</span> wubbel<span style="color:#1f2328">(</span><span style="color:#cf222e">__m128</span> input<span style="color:#1f2328">)</span> <span style="color:#cf222e">noexcept</span> <span style="color:#cf222e">asm</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;_ZGVbN4v__Z6wubbelf&#34;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>__attribute__<span style="color:#1f2328">((</span><span style="color:#cf222e">const</span><span style="color:#1f2328">))</span> <span style="color:#cf222e">__m128</span> wubbel<span style="color:#1f2328">(</span><span style="color:#cf222e">__m128</span> input<span style="color:#1f2328">)</span> <span style="color:#cf222e">noexcept</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">return</span> <span style="color:#6639ba">_mm_hadd_ps</span><span style="color:#1f2328">(</span>_mm_rsqrt_ps<span style="color:#1f2328">(</span>input<span style="color:#1f2328">),</span> input<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>In this case, this allows to implement a function that takes an <code>__m128</code> packed float and returns one of these, but actually comes with the symbol for a vectorized function that takes a single float.</p>

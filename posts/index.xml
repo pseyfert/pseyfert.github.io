@@ -6,21 +6,28 @@
     <description>Recent content in Posts on Yet another blog restart</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Aug 2025 18:26:57 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 19 Nov 2025 23:22:00 +0100</lastBuildDate>
     <atom:link href="https://pseyfert.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bad self-checkout procedure made worse by bad UI</title>
+      <link>https://pseyfert.github.io/2025/11/bad-self-checkout-procedure-made-worse-by-bad-ui/</link>
+      <pubDate>Wed, 19 Nov 2025 23:22:00 +0100</pubDate>
+      <guid>https://pseyfert.github.io/2025/11/bad-self-checkout-procedure-made-worse-by-bad-ui/</guid>
+      <description>&lt;p&gt;To make this post a bit LinkedIn compatible (why?), let&amp;rsquo;s open with something business:&#xA;The self-checkout cash registers at our local supermarket have &amp;lsquo;TOSHIBA&amp;rsquo; written on them.&#xA;I assume in some business to business negotiations that was agreed upon and effectively Toshiba is paying for having their brand name displayed on the terminal (or the supermarket would&amp;rsquo;ve needed to pay more to receive unbranded terminals). And I think this deal backfires because the UI has some flaws which make the product appear poorly designed or tested - so poorly that I&amp;rsquo;m writing a blog post about them. (Or maybe all publicity is good publicity, whatever, it&amp;rsquo;s not like I expect many readers).&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Yes, the skin breathes but does it breath?</title>
       <link>https://pseyfert.github.io/2025/08/yes-the-skin-breathes-but-does-it-breath/</link>
       <pubDate>Sun, 24 Aug 2025 18:26:57 +0200</pubDate>
       <guid>https://pseyfert.github.io/2025/08/yes-the-skin-breathes-but-does-it-breath/</guid>
-      <description>Given my activities in club during highschool years, I attended a couple of first aid courses, refreshers, paramedic courses, etc as standardized by various volunteer organizations in Germany. At a few occasions, breathing, oxygen processing by the body and such got discussed. And one of the teachers&#39; points usually was that the body gets all its oxygen through the air that we breath into the lung and none through the skin and that it was an urban myth that the skin breaths.</description>
+      <description>&lt;p&gt;Given my activities in club during highschool years, I attended a couple of&#xA;first aid courses, refreshers, paramedic courses, etc as standardized by&#xA;various volunteer organizations in Germany. At a few occasions, breathing,&#xA;oxygen processing by the body and such got discussed. And one of the teachers&#39;&#xA;points usually was that the body gets all its oxygen through the air that we&#xA;breath into the lung and none through the skin and that it was an urban myth that the skin&#xA;breaths.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Code I wouldn&#39;t put into production anymore - manual auto vectorization</title>
       <link>https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/</link>
       <pubDate>Fri, 05 Jul 2024 21:21:17 +0200</pubDate>
       <guid>https://pseyfert.github.io/2024/07/code-i-wouldnt-put-into-production-anymore-manual-auto-vectorization/</guid>
-      <description>Let&amp;rsquo;s be clear, this is no work of my own. It is based on what Florian Lemaitre once explained to me and committed to the LHCb software.1 It was something that I had been wondering about for a while and hadn&amp;rsquo;t found resources on the internet.&#xA;Why not put it in production anymore? Thinking of the code that I write these days for production, I&amp;rsquo;m afraid it&amp;rsquo;s way more important to be able to debug and maintain the code base than to squeeze the last CPU cycle out of the performance.</description>
+      <description>&lt;p&gt;Let&amp;rsquo;s be clear, this is no work of my own. It is based on what &lt;a href=&#34;http://cds.cern.ch/record/2668250&#34;&gt;Florian Lemaitre&lt;/a&gt; once explained to me and &lt;a href=&#34;https://gitlab.cern.ch/lhcb/LHCb/-/commit/ccd24ee9d4ad5a05a82886223eb1f67eb782a24d&#34;&gt;committed to the LHCb software&lt;/a&gt;.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&#xA;It was something that I had been wondering about for a while and hadn&amp;rsquo;t found resources on the internet.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-not-put-it-in-production-anymore&#34;&gt;Why not put it in production anymore?&lt;/h2&gt;&#xA;&lt;p&gt;Thinking of the code that I write these days for production, I&amp;rsquo;m afraid&#xA;it&amp;rsquo;s way more important to be able to debug and maintain the code base than to&#xA;squeeze the last CPU cycle out of the performance. Also from a developer time&#xA;point of view, the opportunity cost for writing these blocks is way too high to&#xA;justify (imo).&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

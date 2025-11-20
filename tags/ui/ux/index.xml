@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UI/UX on Yet another blog restart</title>
+    <link>https://pseyfert.github.io/tags/ui/ux/</link>
+    <description>Recent content in UI/UX on Yet another blog restart</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Nov 2025 23:22:00 +0100</lastBuildDate>
+    <atom:link href="https://pseyfert.github.io/tags/ui/ux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bad self-checkout procedure made worse by bad UI</title>
+      <link>https://pseyfert.github.io/2025/11/bad-self-checkout-procedure-made-worse-by-bad-ui/</link>
+      <pubDate>Wed, 19 Nov 2025 23:22:00 +0100</pubDate>
+      <guid>https://pseyfert.github.io/2025/11/bad-self-checkout-procedure-made-worse-by-bad-ui/</guid>
+      <description>&lt;p&gt;To make this post a bit LinkedIn compatible (why?), let&amp;rsquo;s open with something business:&#xA;The self-checkout cash registers at our local supermarket have &amp;lsquo;TOSHIBA&amp;rsquo; written on them.&#xA;I assume in some business to business negotiations that was agreed upon and effectively Toshiba is paying for having their brand name displayed on the terminal (or the supermarket would&amp;rsquo;ve needed to pay more to receive unbranded terminals). And I think this deal backfires because the UI has some flaws which make the product appear poorly designed or tested - so poorly that I&amp;rsquo;m writing a blog post about them. (Or maybe all publicity is good publicity, whatever, it&amp;rsquo;s not like I expect many readers).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
